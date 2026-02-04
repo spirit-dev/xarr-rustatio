@@ -203,7 +203,8 @@ vpn:
     # -- Repository for the gluetun image
     repository: qmcgaw/gluetun
     # -- Image tag
-    tag: latest
+    # renovate: datasource=github-releases depName=qdm12/gluetun
+    tag: v3.41.0
     # -- Image pull policy
     pullPolicy: IfNotPresent
     # -- Environment variables for gluetun configuration
