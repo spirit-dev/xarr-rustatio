@@ -1,0 +1,30 @@
+{{- if and .Values.serviceAccount.create .Values.serviceAccount.rbac.create }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "rustatio.fullname" . }}
+  labels:
+    {{- include "rustatio.labels" . | nindent 4 }}
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "rustatio.fullname" . }}
+  labels:
+    {{- include "rustatio.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ include "rustatio.fullname" . }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "rustatio.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace }}
+{{- end }}

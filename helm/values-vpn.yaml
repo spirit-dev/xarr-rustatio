@@ -1,0 +1,89 @@
+# -- Number of replicas (should typically be 1)
+replicaCount: 1
+
+# VPN configuration using gluetun sidecar
+vpn:
+  # -- Enable VPN routing for tracker requests
+  enabled: true
+  gluetun:
+    # -- Enable gluetun VPN sidecar
+    enabled: true
+    # -- Repository for the gluetun image
+    repository: qmcgaw/gluetun
+    # -- Image tag
+    # renovate: datasource=github-releases depName=qdm12/gluetun
+    tag: v3.41.0
+    # -- Image pull policy
+    pullPolicy: IfNotPresent
+    # -- Environment variables for gluetun configuration
+    # See https://github.com/qdm12/gluetun-wiki for provider-specific settings
+    env: []
+      # - name: VPN_SERVICE_PROVIDER
+      #   value: "protonvpn"
+      # - name: VPN_TYPE
+      #   value: "wireguard"
+      # - name: WIREGUARD_PRIVATE_KEY
+      #   valueFrom:
+      #     secretKeyRef:
+      #       name: vpn-credentials
+      #       key: private-key
+      # - name: SERVER_COUNTRIES
+      #   value: "Switzerland"
+    # -- Environment variables from secrets/configmaps
+    envFrom: []
+
+# Authentication configuration
+auth:
+  # -- Enable authentication
+  enabled: true
+  # -- Authentication token (generate with: openssl rand -hex 32)
+  # If not set and auth.enabled is true, a random token will be generated
+  token: ""
+
+# Watch folder configuration
+watch:
+  # -- Enable watch folder
+  enabled: true
+  # -- Auto-start faking new torrents found in the watch folder
+  autoStart: false
+
+# Persistence configuration
+persistence:
+  # Data persistence for Rustatio state
+  data:
+    # -- Enable persistent storage for data
+    enabled: true
+    # -- Storage class for the PVC
+    storageClass: ""
+    # -- Access mode for the PVC
+    accessMode: ReadWriteOnce
+    # -- Size of the PVC
+    size: 1Gi
+
+  # Torrents watch folder persistence
+  torrents:
+    # -- Enable persistent storage for torrents
+    enabled: true
+    # -- Storage class for the PVC
+    storageClass: ""
+    # -- Access mode for the PVC
+    accessMode: ReadWriteOnce
+    # -- Size of the PVC
+    size: 5Gi
+
+# Ingress configuration
+ingress:
+  # -- Enable ingress
+  enabled: false
+  # -- Ingress class name
+  className: ""
+  # -- Ingress annotations
+  annotations: {}
+  # -- Ingress hosts
+  hosts:
+    - host: rustatio.local
+      paths:
+        - path: /
+          pathType: Prefix
+  # -- TLS configuration
+  tls: []
