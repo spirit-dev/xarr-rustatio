@@ -1,0 +1,18 @@
+apiVersion: v2
+name: rustatio
+description: A Helm chart for Rustatio - Modern BitTorrent Ratio Faker
+version: 1.0.0
+# renovate: datasource=github-releases depName=takitsu21/rustatio
+appVersion: "0.12.2"
+type: application
+home: https://github.com/takitsu21/rustatio
+sources:
+  - https://github.com/takitsu21/rustatio
+keywords:
+  - bittorrent
+  - ratio
+  - torrent
+  - rust
+icon: https://raw.githubusercontent.com/takitsu21/rustatio/main/rustatio-desktop/icons/icon.png
+annotations:
+  category: MediaServer
