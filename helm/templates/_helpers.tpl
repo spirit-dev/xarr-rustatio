@@ -94,6 +94,8 @@ PVC name for data
 {{- define "rustatio.dataPvcName" -}}
 {{- if .Values.persistence.data.existingClaim }}
 {{- .Values.persistence.data.existingClaim }}
+{{- else if .Values.persistence.data.name }}
+{{- .Values.persistence.data.name }}
 {{- else }}
 {{- printf "%s-data" (include "rustatio.fullname" .) }}
 {{- end }}
@@ -105,6 +107,8 @@ PVC name for torrents
 {{- define "rustatio.torrentsPvcName" -}}
 {{- if .Values.persistence.torrents.existingClaim }}
 {{- .Values.persistence.torrents.existingClaim }}
+{{- else if .Values.persistence.torrents.name }}
+{{- .Values.persistence.torrents.name }}
 {{- else }}
 {{- printf "%s-torrents" (include "rustatio.fullname" .) }}
 {{- end }}

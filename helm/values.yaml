@@ -147,6 +147,8 @@ persistence:
     accessMode: ReadWriteOnce
     # -- Size of the PVC
     size: 1Gi
+    # -- Name of the PVC (defaults to <fullname>-data if not set)
+    name: ""
     # -- Use an existing PVC
     existingClaim: ""
     # -- Annotations for the PVC
@@ -164,6 +166,8 @@ persistence:
     accessMode: ReadWriteOnce
     # -- Size of the PVC
     size: 5Gi
+    # -- Name of the PVC (defaults to <fullname>-torrents if not set)
+    name: ""
     # -- Use an existing PVC
     existingClaim: ""
     # -- Annotations for the PVC
