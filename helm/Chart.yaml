@@ -3,7 +3,7 @@ name: rustatio
 description: A Helm chart for Rustatio - Modern BitTorrent Ratio Faker
 version: 1.0.0
 # renovate: datasource=github-releases depName=takitsu21/rustatio
-appVersion: v2.4.2
+appVersion: v2.5.0
 type: application
 home: https://github.com/takitsu21/rustatio
 sources:
