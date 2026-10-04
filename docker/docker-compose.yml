@@ -1,0 +1,19 @@
+services:
+  rustatio:
+    image: ghcr.io/takitsu21/rustatio:latest@sha256:26b4b8dc4c48ad4f33218d732e74949c4eea5ddd76d41c9e75b6eaa8432795e7
+    container_name: rustatio
+    ports:
+      - "${WEBUI_PORT:-8080}:8080"
+    environment:
+      - PORT=8080
+      - RUST_LOG=${RUST_LOG:-info}
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - AUTH_TOKEN=${AUTH_TOKEN:-}
+    volumes:
+      - rustatio_data:/data
+      - ${TORRENTS_DIR:-./torrents}:/torrents
+    restart: unless-stopped
+
+volumes:
+  rustatio_data:

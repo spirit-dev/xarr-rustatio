@@ -1,0 +1,61 @@
+{{- if and .Values.persistence.data.enabled (not .Values.persistence.data.existingClaim) }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "rustatio.dataPvcName" . }}
+  labels:
+    {{- include "rustatio.labels" . | nindent 4 }}
+  {{- if or .Values.persistence.data.annotations .Values.persistence.data.retain }}
+  annotations:
+    {{- with .Values.persistence.data.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+    {{- if .Values.persistence.data.retain }}
+    helm.sh/resource-policy: keep
+    {{- end }}
+  {{- end }}
+spec:
+  accessModes:
+    - {{ .Values.persistence.data.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.data.size }}
+  {{- if .Values.persistence.data.storageClass }}
+  {{- if (eq "-" .Values.persistence.data.storageClass) }}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: {{ .Values.persistence.data.storageClass }}
+  {{- end }}
+  {{- end }}
+{{- end }}
+---
+{{- if and .Values.persistence.torrents.enabled (not .Values.persistence.torrents.existingClaim) }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "rustatio.torrentsPvcName" . }}
+  labels:
+    {{- include "rustatio.labels" . | nindent 4 }}
+  {{- if or .Values.persistence.torrents.annotations .Values.persistence.torrents.retain }}
+  annotations:
+    {{- with .Values.persistence.torrents.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+    {{- if .Values.persistence.torrents.retain }}
+    helm.sh/resource-policy: keep
+    {{- end }}
+  {{- end }}
+spec:
+  accessModes:
+    - {{ .Values.persistence.torrents.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.torrents.size }}
+  {{- if .Values.persistence.torrents.storageClass }}
+  {{- if (eq "-" .Values.persistence.torrents.storageClass) }}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: {{ .Values.persistence.torrents.storageClass }}
+  {{- end }}
+  {{- end }}
+{{- end }}
