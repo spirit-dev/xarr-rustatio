@@ -1,6 +1,6 @@
 services:
   rustatio:
-    image: ghcr.io/takitsu21/rustatio:latest@sha256:26b4b8dc4c48ad4f33218d732e74949c4eea5ddd76d41c9e75b6eaa8432795e7
+    image: ghcr.io/takitsu21/rustatio:latest@sha256:ff2dcd43c7699d5504eab2ef1876d90236142304620f94802240ef68f006652a
     container_name: rustatio
     ports:
       - "${WEBUI_PORT:-8080}:8080"
