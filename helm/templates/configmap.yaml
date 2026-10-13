@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "rustatio.fullname" . }}-config
+  labels:
+    {{- include "rustatio.labels" . | nindent 4 }}
+data:
+  RUST_LOG: {{ .Values.logging.level | quote }}
+  PUID: {{ .Values.puid | quote }}
+  PGID: {{ .Values.pgid | quote }}
