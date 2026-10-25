@@ -16,7 +16,7 @@ services:
     restart: unless-stopped
 
   rustatio:
-    image: ghcr.io/takitsu21/rustatio:latest@sha256:a2a4fa59651c45b7125d1dc664afd00c6f6da85748712a16453f8c9db11bdea7
+    image: ghcr.io/takitsu21/rustatio:latest@sha256:265c85df6851907c9f2126fb296135231440f455d3e9715a2299290bfa99add5
     container_name: rustatio
     environment:
       - PORT=8080
